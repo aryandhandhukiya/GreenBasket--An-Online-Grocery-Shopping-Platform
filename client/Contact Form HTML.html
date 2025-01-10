@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+
+        <title>
+            
+            Contact Form
+        
+        </title>
+
+        <link rel="stylesheet" href="Contact Form CSS.css">
+        
+        <link rel="shortcut icon" type="image/jpg" href="C:\Users\hp\Desktop\College\First Semester\Introduction To Web Technologies\Notepad ++ Files\Project\favicon.ico"/>
+
+        <script src="Contact Form JS.js"></script>
+
+    </head>
+
+    <body>
+
+        <div class="wrapper">
+
+            <h2 align = 'center'>
+                
+                Contact Form
+        
+            </h2>
+
+            <div id="error_message"></div>
+
+            <form id="myform" method="post" action="http://localhost/GreenBasket/server/contact_us.php" onsubmit="return validate();">
+
+                <div class="input_field">
+
+                    <input type="text" name="name" id="name" placeholder="Name">
+
+                </div>
+
+                <div class="input_field">
+
+                    <input type="text" name="subject" id="subject" placeholder="Subject">
+
+                </div>
+
+                <div class="input_field">
+
+                    <input type="text" name="phone" id="number" placeholder="Phone">
+
+                </div>
+
+                <div class="input_field">
+
+                    <input type="text" name="email" placeholder="Email" id="email">
+
+                </div>
+
+                <div class="input_field">
+
+                    <textarea placeholder="Message" name="message" id="message"></textarea>
+
+                </div>
+
+                <button name="submit" value="submit" type="submit" class="btn">
+                    
+                    <a style = 'color: white; text-decoration: none;'>
+                        
+                        Submit
+                    
+                    </a>
+                
+                </button>
+
+            </form>
+
+        </div>
+
+    </body>
+
+</html>
