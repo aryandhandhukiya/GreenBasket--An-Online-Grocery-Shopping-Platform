@@ -32,6 +32,51 @@
 
     <body>
 
+        <script>
+            fetch('products.json')
+                .then(response => response.json())
+                .then(products => {
+                    const productList = document.getElementById('product-list');
+                    products.forEach(product => {
+                    const productBox = document.createElement('div');
+                    productBox.classList.add('product-box');
+                    productBox.innerHTML = `
+                        <img src="${product.image}" alt="${product.name}">
+                        <strong>${product.name}</strong>
+                        <span class="quantity">${product.quantity}</span>
+                        <span class="price">Rs. ${product.price}</span>
+                        <a href="javascript:void(0);" class="cart-btn" onclick="addToCart(${product.id}, '${product.name}', ${product.price})">
+                        <i class="fas fa-shopping-bag"></i> <span>Add to Cart</span>
+                        </a>
+                        <a href="javascript:void(0);" class="like-btn" onclick="likeProduct(${product.id})">
+                        <i class="far fa-heart"></i>
+                        </a>
+                    `;
+                    productList.appendChild(productBox);
+                    });
+                });
+
+                function addToCart(id, name, price) {
+                // Retrieve the cart from localStorage or initialize it
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+                // Add the new product to the cart
+                cart.push({ id, name, price });
+
+                // Save the updated cart back to localStorage
+                localStorage.setItem('cart', JSON.stringify(cart));
+
+                window.location.href = 'Shopping Cart HTML.html';
+
+                // alert(`"${name}" has been added to your cart!`);
+                }
+
+                function likeProduct(id) {
+                alert(`You liked product with ID: ${id}`);
+                }
+
+        </script>
+
         <!--==Navigation================================-->
         <nav class="navigation">
 
@@ -296,7 +341,7 @@
             </div>
 
             <!--box-container---------->
-            <div class="category-container">
+            <div class="category-container">    
 
                 <!--box---------------->
                 <a class="category-box" href = 'Fruits Category Page HTML.html'>
@@ -334,106 +379,23 @@
         <!--category-end----------------------------------->
         <!--==Products====================================-->
         <section id="popular-product">
-            <!--heading----------->
+            <!--heading----------->  
             <div class="product-heading">
-                <h3>Popular Product</h3>
-                <span>All</span>
+              <h3>Popular Product</h3>
+              <span>All</span>
             </div>
             <!--box-container------>
-            <div class="product-container">
-                <!--box---------->
-                <div class="product-box">
-                    <img alt="apple" src="https://i.imgur.com/vUJ2JKU.png">
-                    <strong>Apple</strong>
-                    <span class="quantity">1 KG</span>
-                    <span class="price">Rs. 100</span>
-                    <!--cart-btn------->
-                    <a href="Shopping Cart HTML.html" class="cart-btn">
-                        <i class="fas fa-shopping-bag"></i> Add to Cart
-                    </a>
-                    <!--like-btn------->
-                    <a class="like-btn">
-                        <i class="far fa-heart"></i>
-                    </a>
-                </div>
-                <!--box---------->
-                <div class="product-box">
-                    <img alt="chili" src="https://i.imgur.com/rFhSMZN.png">
-                    <strong>Chili</strong>
-                    <span class="quantity">1 KG</span>
-                    <span class="price">Rs. 80</span>
-                    <!--cart-btn------->
-                    <a href="Shopping Cart HTML.html" class="cart-btn">
-                        <i class="fas fa-shopping-bag"></i> Add to Cart
-                    </a>
-                    <!--like-btn------->
-                    <a class="like-btn">
-                        <i class="far fa-heart"></i>
-                    </a>
-                </div>
-                <!--box---------->
-                <div class="product-box">
-                    <img alt="apple" src="https://i.imgur.com/sGLggWL.jpg">
-                    <strong>Onion</strong>
-                    <span class="quantity">1 KG</span>
-                    <span class="price">Rs. 50</span>
-                    <!--cart-btn------->
-                    <a href="Shopping Cart HTML.html" class="cart-btn">
-                        <i class="fas fa-shopping-bag"></i> Add to Cart
-                    </a>
-                    <!--like-btn------->
-                    <a class="like-btn">
-                        <i class="far fa-heart"></i>
-                    </a>
-                </div>
-                <!--box---------->
-                <div class="product-box">
-                    <img alt="apple" src="https://i.imgur.com/WFjH6ui.png">
-                    <strong>Potato</strong>
-                    <span class="quantity">1 KG</span>
-                    <span class="price">Rs. 60</span>
-                    <!--cart-btn------->
-                    <a href="Shopping Cart HTML.html" class="cart-btn">
-                        <i class="fas fa-shopping-bag"></i> Add to Cart
-                    </a>
-                    <!--like-btn------->
-                    <a class="like-btn">
-                        <i class="far fa-heart"></i>
-                    </a>
-                </div>
-                <!--box---------->
-                <div class="product-box">
-                    <img alt="apple" src="https://i.imgur.com/XVLuy2J.png">
-                    <strong>Garlic</strong>
-                    <span class="quantity">1 KG</span>
-                    <span class="price">Rs. 50</span>
-                    <!--cart-btn------->
-                    <a href="#" class="cart-btn">
-                        <i class="fas fa-shopping-bag"></i> Add to Cart
-                    </a>
-                    <!--like-btn------->
-                    <a class="like-btn">
-                        <i class="far fa-heart"></i>
-                    </a>
-                </div>
-                <!--box---------->
-                <div class="product-box">
-                    <img alt="apple" src="https://i.imgur.com/8l5hDhS.png">
-                    <strong>Tomato</strong>
-                    <span class="quantity">1 KG</span>
-                    <span class="price">Rs. 80</span>
-                    <!--cart-btn------->
-                    <a href="Shopping Cart HTML.html" class="cart-btn">
-                        <i class="fas fa-shopping-bag"></i> Add to Cart
-                    </a>
-                    <!--like-btn------->
-                    <a class="like-btn">
-                        <i class="far fa-heart"></i>
-                    </a>
-                </div>
+            <div class="product-container" id="product-list">
+              <!-- Dynamically loaded products will be inserted here -->
             </div>
-        </section>
+          </section>
         <!--popular-product-end--------------------->
+        <!-- Cart Section -->
+    <!-- <div id="cart">
+        <h2>Cart</h2>
+        <ul id="cart-items"></ul>
+        <p id="cart-total">Total: Rs. 0</p> 
+    </div>  -->
         <!--Popular-bundle-pack===================================-->
         <section id="popular-bundle-pack">
             <!--heading-------------->

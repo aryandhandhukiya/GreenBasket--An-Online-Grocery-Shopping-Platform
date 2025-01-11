@@ -20,164 +20,109 @@
 
     <body>
 
-        <div class="container">
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+    // Load cart data from localStorage
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        const productList = document.getElementById('product-list');
+        const totalPriceElement = document.getElementById('total-price');
+        const totalItemsElement = document.getElementById('total-items');
+        const totalSavingsElement = document.getElementById('total-savings');
+
+        let totalPrice = 0;
+        let totalSavings = 0;
+
+        if (productList) {
+        // Clear the product list before rendering
+        productList.innerHTML = '';
+
+        // Render products in the cart
+        cart.forEach((item, index) => {
+            const productDiv = document.createElement('div');
+            productDiv.classList.add('product');
+
+            productDiv.innerHTML = `
+            <img src="${item.image || 'https://via.placeholder.com/150'}" alt="${item.name}">
+            <div class="product-info">
+                <h3 class="product-name">${item.name}</h3>
+                <h4 class="product-price">Rs. ${item.price}</h4>
+                <h4 class="product-offer">${item.offer || 'No Offer'}</h4>
+                <p class="product-quantity">
+                Qnt: <input type="number" value="1" min="1" onchange="updateQuantity(${index}, this.value)">
+                </p>
+                <p class="product-remove">
+                <i class="fas fa-trash-alt"></i>
+                <span class="remove" onclick="removeProduct(${index})">Remove</span>
+                </p>
+            </div>
+            `;
+
+            productList.appendChild(productDiv);
+
+            totalPrice += item.price;
+            totalSavings += item.savings || 0;
+        });
+
+        // Update totals
+        if (totalPriceElement) totalPriceElement.textContent = `Rs. ${totalPrice}`;
+        if (totalItemsElement) totalItemsElement.textContent = `${cart.length}`;
+        if (totalSavingsElement) totalSavingsElement.textContent = `Rs. ${totalSavings}`;
+        }
+
+        // Update quantity function
+        window.updateQuantity = function (index, quantity) {
+        cart[index].quantity = parseInt(quantity);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        window.location.reload();
+        };
+
+        // Remove product function
+        window.removeProduct = function (index) {
+        cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        window.location.reload();
+        };
+
+    // Checkout function
+    // window.checkout = function () {
+    //   alert('Proceeding to checkout...');
+    //   window.location.href = 'payment.html';
+    // };
+  });
+        </script>
+
+        <!-- <div class="container">
 
             <h1>
                 
                 Shopping Cart
             
-            </h1>
+            </h1> -->
 
             <div class="cart">
-
-                <div class="products">
-
-                    <div class="product">
-
-                        <img src="https://i.imgur.com/oYbYgGQ.jpg">
-
-                        <div class="product-info">
-
-                            <h3 class="product-name">
-                                
-                                Chakki Fresh Atta
-                            
-                            </h3>
-
-                            <h4 class="product-price">
-                                
-                                Rs. 350
-                            
-                            </h4>
-
-                            <h4 class="product-offer">
-                                
-                                50%
-                            
-                            </h4>
-
-                            <p class="product-quantity">
-                                
-                                Qnt: 
-                                
-                                <input value="1" name="">
-                            
-                            </p>
-
-                            <p class="product-remove">
-
-                                <i class="fas fa-trash-alt"></i>
-
-                                <span class="remove">
-                                    
-                                    Remove
-                                
-                                </span>
-
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                    <div class="product">
-
-                        <img src="https://i.imgur.com/mHmTIxp.jpg">
-
-                        <div class="product-info">
-
-                            <h3 class="product-name">
-                                
-                                Maggie
-                            
-                            </h3>
-
-                            <h4 class="product-price">
-                                
-                                Rs. 10
-                            
-                            </h4>
-
-                            <h4 class="product-offer">
-                                
-                                20%
-                            
-                            </h4>
-
-                            <p class="product-quantity">
-                                
-                                Qnt: 
-                                
-                                <input value="1" name="">
-                            
-                            </p>
-                            <p class="product-remove">
-
-                                <i class="fas fa-trash-alt"></i>
-
-                                <span class="remove">
-                                    
-                                    Remove
-                                
-                                </span>
-
-                            </p>
-
-                        </div>
-
-                    </div>
-
+                <!-- Products Section -->
+                <div class="products" id="product-list">
+                  <!-- Dynamically populated products will appear here -->
                 </div>
-
+            
+                <!-- Cart Summary Section -->
                 <div class="cart-total">
-
-                    <p>
-
-                        <span>
-                            
-                            Total Price
-                        
-                        </span>
-
-                        <span>
-                            
-                            Rs. 183
-                        
-                        </span>
-
-                    </p>
-                    <p>
-
-                        <span>
-                            
-                            No. of Items
-                        
-                        </span>
-
-                        <span>
-                            
-                            2
-                        
-                        </span>
-
-                    </p>
-
-                    <p>
-
-                        <span>
-                            
-                            You Save
-                        
-                        </span>
-
-                        <span>
-                            
-                            Rs. 177
-                        
-                        </span>
-
-                    </p>
-
+                  <p>
+                    <span>Total Price</span>
+                    <span id="total-price">Rs. 0</span>
+                  </p>
+                  <p>
+                    <span>No. of Items</span>
+                    <span id="total-items">0</span>
+                  </p>
+                  <p>
+                    <span>You Save</span>
+                    <span id="total-savings">Rs. 0</span>
+                  </p>
+                  <button onclick="checkout()">Checkout</button>
+                </div>
+              </div>
                     <a href="Details For Checkout HTML.html">
                         
                         Proceed to Checkout
@@ -188,7 +133,7 @@
 
             </div>
 
-        </div>
+        <!--</div>-->
 
     </body>
 

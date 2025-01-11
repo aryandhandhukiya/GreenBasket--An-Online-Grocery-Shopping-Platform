@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Apple",
+    "image": "https://i.imgur.com/vUJ2JKU.png",
+    "price": 100,
+    "quantity": "1 KG"
+  },
+  {
+    "id": 2,
+    "name": "Chili",
+    "image": "https://i.imgur.com/rFhSMZN.png",
+    "price": 80,
+    "quantity": "1 KG"
+  },
+  {
+    "id": 3,
+    "name": "Onion",
+    "image": "https://i.imgur.com/sGLggWL.jpg",
+    "price": 50,
+    "quantity": "1 KG"
+  },
+  {
+    "id": 4,
+    "name": "Potato",
+    "image": "https://i.imgur.com/WFjH6ui.png",
+    "price": 60,
+    "quantity": "1 KG"
+  },
+  {
+    "id": 5,
+    "name": "Garlic",
+    "image": "https://i.imgur.com/XVLuy2J.png",
+    "price": 50,
+    "quantity": "1 KG"
+  },
+  {
+    "id": 6,
+    "name": "Tomato",
+    "image": "https://i.imgur.com/8l5hDhS.png",
+    "price": 80,
+    "quantity": "1 KG"
+  }
+]
