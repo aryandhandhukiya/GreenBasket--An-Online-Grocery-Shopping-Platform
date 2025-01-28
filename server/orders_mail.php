@@ -30,11 +30,11 @@ if (isset($_POST['submit'])) {
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
                 $mail->Username   = 'dhandhukiyaaryan05@gmail.com';
-                $mail->Password   = 'vfms lmfb uhxh fdfx';
+                $mail->Password   = '';
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port       = 587;
 
-                $mail->setFrom('your-email@gmail.com', 'GreenBasket');
+                $mail->setFrom('dhandhukiyaaryan05@gmail.com', 'GreenBasket');
                 $mail->addAddress($customerEmail);
 
                 $mail->isHTML(true);
