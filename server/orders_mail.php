@@ -25,12 +25,12 @@ if (isset($_POST['submit'])) {
 
             $mail = new PHPMailer(true);
             try {
-                $mail->SMTPDebug = 2;
+                $mail->SMTPDebug = 0;
                 $mail->isSMTP();
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
                 $mail->Username   = 'dhandhukiyaaryan05@gmail.com';
-                $mail->Password   = '';
+                $mail->Password   = 'vfms lmfb uhxh fdfx';
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                 $mail->Port       = 587;
 
@@ -43,15 +43,16 @@ if (isset($_POST['submit'])) {
                 $mail->AltBody = $orderDetails;
 
                 $mail->send();
-                echo "Order email sent to " . $customerEmail . "<br>";
+                //echo "Order email sent to " . $customerEmail . "<br>";
             } catch (Exception $e) {
-                echo "Failed to send email to $customerEmail. Error: {$mail->ErrorInfo}<br>";
+                error_log("Failed to send email to $customerEmail. Error: {$mail->ErrorInfo}");
             }
         }
     } else {
         echo "No orders found.";
     }
-
     $conn->close();
 }
+header("Location: http://localhost/GreenBasket/client/Payment Confirmation HTML and CSS.html");
+exit();
 ?>
